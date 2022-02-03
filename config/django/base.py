@@ -49,7 +49,8 @@ THIRD_PARTY_APPS = [
     'django_celery_results',
     'django_celery_beat',
     'django_filters',
-    'corsheaders'
+    'corsheaders',
+    'storages'
 ]
 
 INSTALLED_APPS = [
@@ -159,6 +160,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "/media/"
+
+
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'styleguide_example.api.exception_handlers.drf_default_with_modifications_exception_handler',
     # 'EXCEPTION_HANDLER': 'styleguide_example.api.exception_handlers.hacksoft_proposed_exception_handler',
@@ -170,13 +176,8 @@ REST_FRAMEWORK = {
 
 SERVER_HOST_DOMAIN = env("SERVER_HOST_DOMAIN", default="http://localhost:8000")
 
-# # Media
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/media/"
-
-
 from config.settings.cors import *  # noqa
 from config.settings.sessions import *  # noqa
 from config.settings.celery import *  # noqa
 from config.settings.sentry import *  # noqa
-from config.settings.aws import *  # noqa
+from config.settings.file_upload import *  # noqa

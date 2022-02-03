@@ -1,19 +1,23 @@
 from django.urls import path
 
 from styleguide_example.files.apis import (
-    FileGeneratePrivatePresignedPostApi,
-    FileLocalUploadAPI,
-    FileVerifyUploadAPI
+    FileGeneratePresignedPostApi,
+    FileLocalUploadApi,
+    FileVerifyUploadApi
 )
 
 urlpatterns = [
-    path("private-presigned-post/", FileGeneratePrivatePresignedPostApi.as_view()),
     path(
-        "<int:file_id>/local-upload/",
-        FileLocalUploadAPI.as_view(),
+        "generate-presigned-post/",
+        FileGeneratePresignedPostApi.as_view()
     ),
     path(
-        "<int:file_id>/verify-upload/",
-        FileVerifyUploadAPI.as_view(),
+        "<uuid:file_id>/local-upload/",
+        FileLocalUploadApi.as_view(),
+        name="local-upload"
+    ),
+    path(
+        "<uuid:file_id>/verify-upload/",
+        FileVerifyUploadApi.as_view(),
     ),
 ]
